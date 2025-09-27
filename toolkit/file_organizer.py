@@ -24,3 +24,26 @@ class FileOrganizer:
             if ext in exts:
                 return cat
         return "Miscellaneous"
+
+    def scan_directory(self) -> List[Path]:
+        """Returns list of files to process."""
+        if not self.target_dir.exists():
+            raise FileNotFoundError(f"Target directory {self.target_dir} does not exist.")
+        return [f for f in self.target_dir.iterdir() if f.is_file()]
+
+    def organize(self, dry_run: bool = False) -> Dict[str, int]:
+        """Moves files into categorized subfolders."""
+        summary = {cat: 0 for cat in self.categories}
+        summary["Miscellaneous"] = 0
+        
+        for file_path in self.scan_directory():
+            category = self.categorize_file(file_path.suffix)
+            dest_folder = self.target_dir / category
+            if not dry_run:
+                dest_folder.mkdir(exist_ok=True)
+                target_path = dest_folder / file_path.name
+                if not target_path.exists():
+                    shutil.move(str(file_path), str(target_path))
+            summary[category] += 1
+            
+        return summary
