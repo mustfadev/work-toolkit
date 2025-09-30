@@ -79,3 +79,17 @@ import logging
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger("toolkit.organizer")
+
+def remove_empty_folders(path: Path) -> int:
+    """Recursively removes empty directories."""
+    removed = 0
+    for root, dirs, _ in os.walk(path, topdown=False):
+        for dir_name in dirs:
+            dir_path = Path(root) / dir_name
+            try:
+                if not any(dir_path.iterdir()):
+                    dir_path.rmdir()
+                    removed += 1
+            except OSError:
+                pass
+    return removed
