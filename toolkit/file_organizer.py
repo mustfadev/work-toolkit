@@ -47,3 +47,30 @@ class FileOrganizer:
             summary[category] += 1
             
         return summary
+
+import hashlib
+
+def calculate_sha256(file_path: Path, chunk_size: int = 65536) -> str:
+    """Computes SHA-256 hash for file content."""
+    sha = hashlib.sha256()
+    with open(file_path, "rb") as f:
+        while chunk := f.read(chunk_size):
+            sha.update(chunk)
+    return sha.hexdigest()
+
+class DuplicateScanner:
+    """Finds duplicate files based on content hash."""
+    def __init__(self, directory: str):
+        self.directory = Path(directory)
+        
+    def find_duplicates(self) -> Dict[str, List[Path]]:
+        hashes = {}
+        for root, _, files in os.walk(self.directory):
+            for file in files:
+                p = Path(root) / file
+                try:
+                    file_hash = calculate_sha256(p)
+                    hashes.setdefault(file_hash, []).append(p)
+                except (PermissionError, OSError):
+                    continue
+        return {h: paths for h, paths in hashes.items() if len(paths) > 1}
