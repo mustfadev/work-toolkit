@@ -74,3 +74,8 @@ class DuplicateScanner:
                 except (PermissionError, OSError):
                     continue
         return {h: paths for h, paths in hashes.items() if len(paths) > 1}
+
+import logging
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logger = logging.getLogger("toolkit.organizer")
