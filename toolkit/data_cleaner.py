@@ -24,3 +24,13 @@ class DataSanitizer:
         if cls.EMAIL_REGEX.match(cleaned):
             return cleaned
         return None
+
+    @classmethod
+    def format_phone(cls, phone: str, default_country_code: str = "+1") -> str:
+        """Standardizes phone numbers into E.164 format stub."""
+        if not phone:
+            return ""
+        cleaned = cls.PHONE_REGEX.sub("", phone.strip())
+        if not cleaned.startswith("+"):
+            cleaned = default_country_code + cleaned.lstrip("0")
+        return cleaned
