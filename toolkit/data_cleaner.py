@@ -34,3 +34,23 @@ class DataSanitizer:
         if not cleaned.startswith("+"):
             cleaned = default_country_code + cleaned.lstrip("0")
         return cleaned
+
+class CSVCleaner:
+    """Processes and cleans CSV data files."""
+    def __init__(self, input_path: str):
+        self.input_path = input_path
+        
+    def read_rows(self) -> List[Dict[str, str]]:
+        with open(self.input_path, mode="r", encoding="utf-8", errors="replace") as f:
+            reader = csv.DictReader(f)
+            return list(reader)
+            
+    def deduplicate(self, rows: List[Dict[str, Any]], key_field: str) -> List[Dict[str, Any]]:
+        seen = set()
+        unique = []
+        for r in rows:
+            val = r.get(key_field)
+            if val and val not in seen:
+                seen.add(val)
+                unique.append(r)
+        return unique
