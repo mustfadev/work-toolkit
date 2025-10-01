@@ -1,0 +1,26 @@
+import csv
+import re
+from typing import List, Dict, Any, Optional
+
+class DataSanitizer:
+    """Utilities for cleaning text, emails, and tabular data."""
+    
+    EMAIL_REGEX = re.compile(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
+    PHONE_REGEX = re.compile(r"[^\d+]")
+    
+    @classmethod
+    def clean_text(cls, text: str) -> str:
+        """Removes extra whitespaces and controls characters."""
+        if not text:
+            return ""
+        return " ".join(text.strip().split())
+        
+    @classmethod
+    def validate_email(cls, email: str) -> Optional[str]:
+        """Validates and lowercases email address."""
+        if not email:
+            return None
+        cleaned = email.strip().lower()
+        if cls.EMAIL_REGEX.match(cleaned):
+            return cleaned
+        return None
