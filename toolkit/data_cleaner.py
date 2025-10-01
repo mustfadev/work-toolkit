@@ -54,3 +54,13 @@ class CSVCleaner:
                 seen.add(val)
                 unique.append(r)
         return unique
+
+    def export_clean(self, rows: List[Dict[str, Any]], output_path: str) -> int:
+        if not rows:
+            return 0
+        headers = list(rows[0].keys())
+        with open(output_path, mode="w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=headers)
+            writer.writeheader()
+            writer.writerows(rows)
+        return len(rows)
