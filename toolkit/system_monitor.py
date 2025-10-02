@@ -29,3 +29,20 @@ class SystemMonitor:
             }
         except Exception:
             return {"total_gb": 0.0, "used_gb": 0.0, "free_gb": 0.0, "percent_used": 0.0}
+
+try:
+    import psutil
+    HAS_PSUTIL = True
+except ImportError:
+    HAS_PSUTIL = False
+
+def get_system_load() -> Dict[str, Any]:
+    if HAS_PSUTIL:
+        mem = psutil.virtual_memory()
+        return {
+            "cpu_percent": psutil.cpu_percent(interval=0.1),
+            "ram_used_gb": round((mem.total - mem.available) / (1024 ** 3), 2),
+            "ram_total_gb": round(mem.total / (1024 ** 3), 2),
+            "ram_percent": mem.percent
+        }
+    return {"cpu_percent": 0.0, "ram_used_gb": 0.0, "ram_total_gb": 0.0, "ram_percent": 0.0}
