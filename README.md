@@ -25,3 +25,12 @@ email = DataSanitizer.validate_email(" user@DOMAIN.com ")
 phone = DataSanitizer.format_phone("0555-123-456", default_country_code="+966")
 print(email, phone)
 ```
+
+### System Monitor Usage
+```python
+from toolkit.system_monitor import SystemMonitor, AlertManager
+
+disk = SystemMonitor.get_disk_usage("C:\\")
+alerts = AlertManager().check_alerts("C:\\")
+print(f"Disk used: {disk['percent_used']}% | Alerts: {alerts}")
+```
