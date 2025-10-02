@@ -100,3 +100,15 @@ def list_available_drives() -> List[str]:
         import string
         return [f"{d}:\\" for d in string.ascii_uppercase if os.path.exists(f"{d}:\\")]
     return ["/"]
+
+def format_system_summary() -> str:
+    disk = SystemMonitor.get_disk_usage()
+    load = get_system_load()
+    return f"""
+System Status Summary:
+----------------------
+OS:           {platform.system()} {platform.release()}
+CPU Load:     {load.get('cpu_percent', 0)}%
+RAM Used:     {load.get('ram_percent', 0)}%
+Disk Used:    {disk.get('percent_used', 0)}% ({disk.get('free_gb', 0)} GB free)
+"""
