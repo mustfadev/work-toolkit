@@ -63,3 +63,33 @@ class AlertManager:
             alerts.append(f"WARNING: RAM usage high ({load['ram_percent']}%)")
             
         return alerts
+
+import sqlite3
+from datetime import datetime
+
+class MetricsLogger:
+    """Logs system metrics to a local SQLite database."""
+    def __init__(self, db_path: str = "system_metrics.db"):
+        self.db_path = db_path
+        self._init_db()
+
+    def _init_db(self):
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS metrics (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    timestamp TEXT,
+                    cpu_percent REAL,
+                    ram_percent REAL,
+                    disk_percent REAL
+                )
+            """)
+
+    def log_current(self, disk_path: str = "/"):
+        load = get_system_load()
+        disk = SystemMonitor.get_disk_usage(disk_path)
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute(
+                "INSERT INTO metrics (timestamp, cpu_percent, ram_percent, disk_percent) VALUES (?, ?, ?, ?)",
+                (datetime.now().isoformat(), load["cpu_percent"], load["ram_percent"], disk["percent_used"])
+            )
