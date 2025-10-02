@@ -64,3 +64,11 @@ class CSVCleaner:
             writer.writeheader()
             writer.writerows(rows)
         return len(rows)
+
+    @classmethod
+    def sanitize_dict(cls, data: Dict[str, Any]) -> Dict[str, Any]:
+        """Strips whitespace from all string values in a dictionary."""
+        return {
+            k: cls.clean_text(v) if isinstance(v, str) else v
+            for k, v in data.items()
+        }
