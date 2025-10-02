@@ -72,3 +72,15 @@ class CSVCleaner:
             k: cls.clean_text(v) if isinstance(v, str) else v
             for k, v in data.items()
         }
+
+from datetime import datetime
+
+def parse_flexible_date(date_str: str) -> Optional[datetime]:
+    """Tries parsing multiple date formats."""
+    formats = ["%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y", "%Y/%m/%d", "%d-%m-%Y"]
+    for fmt in formats:
+        try:
+            return datetime.strptime(date_str.strip(), fmt)
+        except (ValueError, AttributeError):
+            continue
+    return None
