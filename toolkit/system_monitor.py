@@ -93,3 +93,10 @@ class MetricsLogger:
                 "INSERT INTO metrics (timestamp, cpu_percent, ram_percent, disk_percent) VALUES (?, ?, ?, ?)",
                 (datetime.now().isoformat(), load["cpu_percent"], load["ram_percent"], disk["percent_used"])
             )
+
+def list_available_drives() -> List[str]:
+    """Returns accessible drive letters on Windows."""
+    if platform.system() == "Windows":
+        import string
+        return [f"{d}:\\" for d in string.ascii_uppercase if os.path.exists(f"{d}:\\")]
+    return ["/"]
