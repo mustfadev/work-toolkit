@@ -46,3 +46,20 @@ def get_system_load() -> Dict[str, Any]:
             "ram_percent": mem.percent
         }
     return {"cpu_percent": 0.0, "ram_used_gb": 0.0, "ram_total_gb": 0.0, "ram_percent": 0.0}
+
+class AlertManager:
+    def __init__(self, disk_threshold: float = 90.0, ram_threshold: float = 85.0):
+        self.disk_threshold = disk_threshold
+        self.ram_threshold = ram_threshold
+
+    def check_alerts(self, disk_path: str = "/") -> List[str]:
+        alerts = []
+        disk = SystemMonitor.get_disk_usage(disk_path)
+        if disk["percent_used"] >= self.disk_threshold:
+            alerts.append(f"WARNING: Disk usage high ({disk['percent_used']}%) on {disk_path}")
+            
+        load = get_system_load()
+        if load["ram_percent"] >= self.ram_threshold:
+            alerts.append(f"WARNING: RAM usage high ({load['ram_percent']}%)")
+            
+        return alerts
