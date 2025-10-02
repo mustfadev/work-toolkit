@@ -27,3 +27,12 @@ class BackupManager:
                     zipf.write(file_p, arcname)
                     
         return target_zip
+
+    def verify_archive(self, zip_path: Path) -> bool:
+        """Verifies zip integrity."""
+        try:
+            with zipfile.ZipFile(zip_path, "r") as zipf:
+                bad_file = zipf.testzip()
+                return bad_file is None
+        except zipfile.BadZipFile:
+            return False
