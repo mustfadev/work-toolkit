@@ -34,3 +34,13 @@ disk = SystemMonitor.get_disk_usage("C:\\")
 alerts = AlertManager().check_alerts("C:\\")
 print(f"Disk used: {disk['percent_used']}% | Alerts: {alerts}")
 ```
+
+### Backup Manager Usage
+```python
+from toolkit.backup_service import BackupManager
+
+mgr = BackupManager("./backups")
+zip_path = mgr.create_zip_archive("./my_project")
+mgr.rotate_backups(max_keep=3)
+print("Backup created:", zip_path)
+```
