@@ -50,3 +50,11 @@ class SimpleHttpClient:
                     return {"status": 0, "error": str(e), "attempts": attempt}
                 time.sleep(self.base_delay * (2 ** (attempt - 1)))
         return {"status": 0, "error": "Unknown error", "attempts": self.max_retries}
+
+def resolve_hostname(host: str) -> List[str]:
+    """Resolves hostname to IP addresses."""
+    try:
+        _, _, ip_list = socket.gethostbyname_ex(host)
+        return ip_list
+    except socket.gaierror:
+        return []
