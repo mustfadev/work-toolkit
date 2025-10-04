@@ -44,3 +44,12 @@ zip_path = mgr.create_zip_archive("./my_project")
 mgr.rotate_backups(max_keep=3)
 print("Backup created:", zip_path)
 ```
+
+### Network Diagnostics Usage
+```python
+from toolkit.net_tools import NetworkDiagnostics, resolve_hostname
+
+ping_res = NetworkDiagnostics.ping("1.1.1.1")
+ips = resolve_hostname("google.com")
+print("Ping result:", ping_res["reachable"], "IPs:", ips)
+```
