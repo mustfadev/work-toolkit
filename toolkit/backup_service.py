@@ -53,3 +53,11 @@ class BackupManager:
                 except OSError:
                     pass
         return removed
+
+DEFAULT_EXCLUSIONS = {".git", "__pycache__", "node_modules", ".venv", ".tmp"}
+
+def should_exclude(rel_path: Path, exclusions=DEFAULT_EXCLUSIONS) -> bool:
+    for part in rel_path.parts:
+        if part in exclusions:
+            return True
+    return False
