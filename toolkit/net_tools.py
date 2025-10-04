@@ -24,3 +24,29 @@ class NetworkDiagnostics:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.settimeout(timeout)
             return s.connect_ex((host, port)) == 0
+
+import time
+import urllib.request
+import urllib.error
+
+class SimpleHttpClient:
+    """Lightweight HTTP client with exponential backoff retry."""
+    def __init__(self, max_retries: int = 3, base_delay: float = 1.0):
+        self.max_retries = max_retries
+        self.base_delay = base_delay
+
+    def get(self, url: str, headers: Dict[str, str] = None) -> Dict[str, Any]:
+        req = urllib.request.Request(url, headers=headers or {"User-Agent": "WorkToolkit/1.0"})
+        for attempt in range(1, self.max_retries + 1):
+            try:
+                with urllib.request.urlopen(req, timeout=5) as resp:
+                    return {
+                        "status": resp.status,
+                        "data": resp.read().decode("utf-8", errors="replace"),
+                        "attempts": attempt
+                    }
+            except urllib.error.URLError as e:
+                if attempt == self.max_retries:
+                    return {"status": 0, "error": str(e), "attempts": attempt}
+                time.sleep(self.base_delay * (2 ** (attempt - 1)))
+        return {"status": 0, "error": "Unknown error", "attempts": self.max_retries}
