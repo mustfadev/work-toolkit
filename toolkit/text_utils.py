@@ -18,3 +18,18 @@ class TextProcessor:
             counts[w] = counts.get(w, 0) + 1
         sorted_pairs = sorted(counts.items(), key=lambda x: x[1], reverse=True)
         return dict(sorted_pairs[:top_n])
+
+    @staticmethod
+    def strip_markdown(md_text: str) -> str:
+        """Removes common markdown symbols."""
+        text = re.sub(r"#+\s*", "", md_text)
+        text = re.sub(r"\*\*|__|\*|_", "", text)
+        text = re.sub(r"`{1,3}.*?`{1,3}", "", text, flags=re.DOTALL)
+        text = re.sub(r"\[(.*?)\]\(.*?\)", r"\1", text)
+        return text.strip()
+
+    @staticmethod
+    def truncate(text: str, max_chars: int = 100, ellipsis: str = "...") -> str:
+        if len(text) <= max_chars:
+            return text
+        return text[:max_chars - len(ellipsis)].rstrip() + ellipsis
