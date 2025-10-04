@@ -36,3 +36,20 @@ class BackupManager:
                 return bad_file is None
         except zipfile.BadZipFile:
             return False
+
+    def rotate_backups(self, max_keep: int = 5) -> List[Path]:
+        """Keeps newest N backups and removes older ones."""
+        archives = sorted(
+            [p for p in self.backup_dir.glob("*.zip") if p.is_file()],
+            key=lambda x: x.stat().st_mtime,
+            reverse=True
+        )
+        removed = []
+        if len(archives) > max_keep:
+            for old in archives[max_keep:]:
+                try:
+                    old.unlink()
+                    removed.append(old)
+                except OSError:
+                    pass
+        return removed
