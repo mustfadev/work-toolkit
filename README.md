@@ -53,3 +53,11 @@ ping_res = NetworkDiagnostics.ping("1.1.1.1")
 ips = resolve_hostname("google.com")
 print("Ping result:", ping_res["reachable"], "IPs:", ips)
 ```
+
+## CLI Interface
+```bash
+python cli.py organize ~/Downloads
+python cli.py status
+python cli.py password --length 20
+python cli.py ping 8.8.8.8
+```
