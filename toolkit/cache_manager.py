@@ -1,0 +1,28 @@
+import time
+from typing import Any, Optional, Dict, Tuple
+
+class TTLCache:
+    """Simple in-memory Key-Value store with TTL expiration."""
+    def __init__(self, default_ttl_seconds: int = 300):
+        self.default_ttl = default_ttl_seconds
+        self._store: Dict[str, Tuple[Any, float]] = {}
+
+    def set(self, key: str, value: Any, ttl: Optional[int] = None):
+        expiry = time.time() + (ttl if ttl is not None else self.default_ttl)
+        self._store[key] = (value, expiry)
+
+    def get(self, key: str) -> Optional[Any]:
+        if key not in self._store:
+            return None
+        val, expiry = self._store[key]
+        if time.time() > expiry:
+            del self._store[key]
+            return None
+        return val
+
+    def clear_expired(self) -> int:
+        now = time.time()
+        expired_keys = [k for k, (_, exp) in self._store.items() if now > exp]
+        for k in expired_keys:
+            del self._store[k]
+        return len(expired_keys)
