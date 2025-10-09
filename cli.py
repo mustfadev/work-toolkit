@@ -40,3 +40,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Backup command support
+def add_backup_subparser(subparsers):
+    p = subparsers.add_parser("backup", help="Create zip backup of directory")
+    p.add_argument("source", help="Source folder to backup")
+    p.add_argument("--dest", default="./backups", help="Destination folder")
