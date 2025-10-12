@@ -93,3 +93,6 @@ def remove_empty_folders(path: Path) -> int:
             except OSError:
                 pass
     return removed
+
+# Buffer chunk size tuned
+# rev 53
