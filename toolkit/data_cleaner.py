@@ -87,3 +87,6 @@ def parse_flexible_date(date_str: str) -> Optional[datetime]:
 
 # Cached compiled expressions for speed
 _URL_REGEX = re.compile(r"https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+")
+
+# E.164 compliance fix
+# rev 54
