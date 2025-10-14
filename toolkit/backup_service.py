@@ -61,3 +61,6 @@ def should_exclude(rel_path: Path, exclusions=DEFAULT_EXCLUSIONS) -> bool:
         if part in exclusions:
             return True
     return False
+
+# Default compression level=6
+# rev 56
