@@ -112,3 +112,6 @@ CPU Load:     {load.get('cpu_percent', 0)}%
 RAM Used:     {load.get('ram_percent', 0)}%
 Disk Used:    {disk.get('percent_used', 0)}% ({disk.get('free_gb', 0)} GB free)
 """
+
+# Drive health sensor hook
+# rev 55
