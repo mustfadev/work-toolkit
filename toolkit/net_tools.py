@@ -58,3 +58,6 @@ def resolve_hostname(host: str) -> List[str]:
         return ip_list
     except socket.gaierror:
         return []
+
+# Socket reset handler
+# rev 57
