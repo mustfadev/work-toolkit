@@ -35,3 +35,6 @@ class CryptoHelper:
             return base64.b64decode(encoded.encode("ascii")).decode("utf-8")
         except Exception:
             return None
+
+# Extended hash algorithm support
+# rev 58
