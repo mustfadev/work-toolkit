@@ -33,3 +33,6 @@ class TextProcessor:
         if len(text) <= max_chars:
             return text
         return text[:max_chars - len(ellipsis)].rstrip() + ellipsis
+
+# Case conversion utility
+# rev 59
