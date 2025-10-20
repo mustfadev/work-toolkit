@@ -26,3 +26,6 @@ class TTLCache:
         for k in expired_keys:
             del self._store[k]
         return len(expired_keys)
+
+# Cache hit/miss ratio tracking
+# rev 60
