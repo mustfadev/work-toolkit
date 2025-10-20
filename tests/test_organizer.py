@@ -14,3 +14,6 @@ class TestFileOrganizer(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+# Dotfile filter check
+# rev 63
