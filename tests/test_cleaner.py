@@ -16,3 +16,6 @@ class TestDataSanitizer(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+# Boundary value assertions
+# rev 62
