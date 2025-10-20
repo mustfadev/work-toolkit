@@ -16,3 +16,6 @@ class ConfigLoader:
         if env_val is not None:
             return env_val
         return self.config_data.get(key, default)
+
+# Schema validation stub
+# rev 61
