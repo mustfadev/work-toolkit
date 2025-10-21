@@ -61,3 +61,6 @@ python cli.py status
 python cli.py password --length 20
 python cli.py ping 8.8.8.8
 ```
+
+<!-- Troubleshooting notes -->
+# rev 64
