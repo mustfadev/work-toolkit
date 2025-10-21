@@ -8,3 +8,6 @@ __author__ = "mustfadev"
 from .file_organizer import FileOrganizer
 from .data_cleaner import DataSanitizer
 from .system_monitor import SystemMonitor
+
+# internal revision stamp
+# rev 65
