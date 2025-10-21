@@ -9,3 +9,7 @@ env/
 *.sqlite3
 *.db
 .DS_Store
+
+*.coverage
+.pytest_cache/
+# rev 66
