@@ -74,3 +74,6 @@ class CryptoHelper:
 
 # Extended hash algorithm support
 # rev 238
+
+# Extended hash algorithm support
+# rev 253
