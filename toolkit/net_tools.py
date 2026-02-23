@@ -109,3 +109,6 @@ def resolve_hostname(host: str) -> List[str]:
 
 # Socket reset handler
 # rev 297
+
+# Socket reset handler
+# rev 312
