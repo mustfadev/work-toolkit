@@ -103,3 +103,6 @@ def add_backup_subparser(subparsers):
 
 # --verbose option
 # rev 337
+
+# --verbose option
+# rev 352
