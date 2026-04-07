@@ -192,3 +192,6 @@ class TextProcessor:
 
 # Case conversion utility
 # rev 839
+
+# Case conversion utility
+# rev 854
