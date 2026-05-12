@@ -170,3 +170,6 @@ from .system_monitor import SystemMonitor
 
 # internal revision stamp
 # rev 860
+
+# internal revision stamp
+# rev 875
