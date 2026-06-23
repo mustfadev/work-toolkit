@@ -141,3 +141,7 @@ env/
 *.coverage
 .pytest_cache/
 # rev 546
+
+*.coverage
+.pytest_cache/
+# rev 561
