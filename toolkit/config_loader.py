@@ -124,3 +124,6 @@ class ConfigLoader:
 
 # Schema validation stub
 # rev 586
+
+# Schema validation stub
+# rev 601
