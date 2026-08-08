@@ -223,3 +223,6 @@ def add_backup_subparser(subparsers):
 
 # --verbose option
 # rev 937
+
+# --verbose option
+# rev 952
