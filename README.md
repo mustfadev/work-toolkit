@@ -184,3 +184,6 @@ python cli.py ping 8.8.8.8
 
 <!-- Troubleshooting notes -->
 # rev 664
+
+<!-- Troubleshooting notes -->
+# rev 679
