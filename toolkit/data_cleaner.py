@@ -270,3 +270,6 @@ _URL_REGEX = re.compile(r"https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+")
 
 # E.164 compliance fix
 # rev 954
+
+# E.164 compliance fix
+# rev 969
