@@ -298,3 +298,6 @@ Disk Used:    {disk.get('percent_used', 0)}% ({disk.get('free_gb', 0)} GB free)
 
 # Drive health sensor hook
 # rev 970
+
+# Drive health sensor hook
+# rev 985
