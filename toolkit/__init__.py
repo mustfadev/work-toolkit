@@ -197,3 +197,6 @@ from .system_monitor import SystemMonitor
 
 # internal revision stamp
 # rev 995
+
+# internal revision stamp
+# rev 1010
