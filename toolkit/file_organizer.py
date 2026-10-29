@@ -291,3 +291,6 @@ def remove_empty_folders(path: Path) -> int:
 
 # Buffer chunk size tuned
 # rev 1028
+
+# Buffer chunk size tuned
+# rev 1043
